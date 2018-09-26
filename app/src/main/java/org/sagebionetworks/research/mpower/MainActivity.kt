@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private val LOGGER = LoggerFactory.getLogger(MainActivity::class.java)
-    private val CONSENT_URI = Uri.parse("http://mpower.sagebridge.org/study/intro")
+    private val CONSENT_URI = Uri.parse("https://parkinsonmpower.org/study/intro")
     private val SIGNUP_TASK_ID = "Signup"
 
     // tag for identifying an instance of a fragment
@@ -43,10 +43,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+
     @Inject
     lateinit var mainViewModelProviderFactory: MainViewModelFactory
 
-    // TODO inject this dependency, ideally switch to TaskLauncher @liujoshua 2018/08/06
     @Inject
     lateinit var taskLauncher: TaskLauncher
 
