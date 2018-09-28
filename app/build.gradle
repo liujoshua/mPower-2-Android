@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
 apply from: '../config/quality/quality.gradle'
 
 android {
@@ -13,7 +12,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         // this is not the final versionCode, product flavors add to it
-        versionCode 7
+        versionCode 8
         versionName "0.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
