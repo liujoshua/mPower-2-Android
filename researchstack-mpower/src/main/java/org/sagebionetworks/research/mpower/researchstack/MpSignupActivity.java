@@ -6,7 +6,6 @@ import org.researchstack.backbone.step.Step;
 import org.researchstack.backbone.ui.ActiveTaskActivity;
 
 public class MpSignupActivity extends ActiveTaskActivity {
-    private static final String LOG_TAG = MpSignupActivity.class.getCanonicalName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

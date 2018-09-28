@@ -24,4 +24,8 @@ public class MainViewModel extends ViewModel {
     public boolean isConsented() {
         return authenticationManager.isConsented();
     }
+
+    public void refreshSession() {
+        authenticationManager.getLatestUserSessionInfo().toBlocking().value();
+    }
 }

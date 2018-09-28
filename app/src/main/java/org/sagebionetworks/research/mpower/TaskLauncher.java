@@ -4,12 +4,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import static org.sagebionetworks.research.mpower.Tasks.MEDICATION;
-import static org.sagebionetworks.research.mpower.Tasks.SYMPTOMS;
-import static org.sagebionetworks.research.mpower.Tasks.TAPPING;
-import static org.sagebionetworks.research.mpower.Tasks.TREMOR;
-import static org.sagebionetworks.research.mpower.Tasks.TRIGGERS;
-import static org.sagebionetworks.research.mpower.Tasks.WALK_AND_BALANCE;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.MEDICATION;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.SIGN_UP;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.SYMPTOMS;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.TAPPING;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.TREMOR;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.TRIGGERS;
+import static org.sagebionetworks.research.mpower.research.MpIdentifier.WALK_AND_BALANCE;
 
 import android.app.Activity;
 import android.arch.lifecycle.LiveData;
@@ -68,7 +69,7 @@ public class TaskLauncher {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskLauncher.class);
 
-    private static final ImmutableSet<String> RS_TASKS = ImmutableSet.of();
+    private static final ImmutableSet<String> RS_TASKS = ImmutableSet.of(SIGN_UP);
 
     private static final ImmutableSet<String> SR_TASKS = ImmutableSet
             .of(TAPPING, WALK_AND_BALANCE, TRIGGERS, TREMOR, SYMPTOMS, MEDICATION);

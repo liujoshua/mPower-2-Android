@@ -16,6 +16,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.navigation
 import org.sagebionetworks.research.mpower.authentication.ExternalIdSignInActivity
 import org.sagebionetworks.research.mpower.profile.ProfileFragment
+import org.sagebionetworks.research.mpower.research.MpIdentifier.SIGN_UP
 import org.sagebionetworks.research.mpower.tracking.TrackingTabFragment
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private val LOGGER = LoggerFactory.getLogger(MainActivity::class.java)
     private val CONSENT_URI = Uri.parse("https://parkinsonmpower.org/study/intro")
-    private val SIGNUP_TASK_ID = "Signup"
+    private val CONSENT_ACTIVITY_REQUEST_CODE = 1725
 
     // tag for identifying an instance of a fragment
     private val TAG_FRAGMENT_TRACKING = "tracking"
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun onResume() {
         super.onResume()
+        // TODO: make this async for data refresh from network @liujoshua 2018/09/27
         if (!mainViewModel.isAuthenticated) {
             showSignUpActivity()
         } else if (!mainViewModel.isConsented) {
@@ -78,10 +80,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CONSENT_ACTIVITY_REQUEST_CODE) {
+            // TODO: get rid of blocking network call 2018/09/27 @liujoshua
+            mainViewModel.refreshSession()
+        }
+    }
+
     fun showSignUpActivity() {
         LOGGER.debug("Showing sign up activity")
 
-        startActivity(Intent(Intent(this, ExternalIdSignInActivity::class.java)))
+        taskLauncher.launchTask(this, SIGN_UP, null)
+//        startActivity(Intent(Intent(this, ExternalIdSignInActivity::class.java)))
     }
 
     fun showConsentActivity() {
@@ -90,6 +101,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         // TODO use ChromeTab @liujoshua 2018/08/06
         val browserIntent = Intent(Intent.ACTION_VIEW, CONSENT_URI)
         startActivity(browserIntent)
+        startActivityForResult(browserIntent, CONSENT_ACTIVITY_REQUEST_CODE)
     }
 
     fun showMainActivityLayout() {

@@ -34,6 +34,7 @@ android {
             versionNameSuffix "-debug"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+            versionNameSuffix "-debug"
         }
         release {
             minifyEnabled false
@@ -49,6 +50,7 @@ android {
             versionCode 1 + 2 * android.defaultConfig.versionCode
             versionNameSuffix "-internal"
             dimension "userRole"
+            versionNameSuffix "-internal"
         }
         participant {
             versionCode 2 * android.defaultConfig.versionCode

@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import org.researchstack.backbone.task.Task;
 import org.researchstack.backbone.ui.ActiveTaskActivity;
+import org.sagebionetworks.research.mpower.researchstack.framework.MpResourceManager;
 import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory;
 
 import java.util.UUID;

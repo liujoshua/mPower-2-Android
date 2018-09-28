@@ -29,4 +29,5 @@ public @interface MpIdentifier {
     String MEASURING = "Measuring";
     String TRACKING = "Tracking";
     String HEALTH_SURVEYS = "Health Surveys";
+    String SIGN_UP = "Signup";
 }
