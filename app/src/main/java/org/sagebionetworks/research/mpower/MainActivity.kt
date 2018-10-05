@@ -17,23 +17,26 @@ import kotlinx.android.synthetic.main.activity_main.navigation
 import org.sagebionetworks.research.mpower.authentication.ExternalIdSignInActivity
 import org.sagebionetworks.research.mpower.profile.ProfileFragment
 import org.sagebionetworks.research.mpower.research.MpIdentifier.SIGN_UP
+import org.sagebionetworks.research.mpower.sageresearch.ui.BridgeAccessViewModel
+import org.sagebionetworks.research.mpower.sageresearch.ui.WebConsentFragment
 import org.sagebionetworks.research.mpower.tracking.TrackingTabFragment
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private val LOGGER = LoggerFactory.getLogger(MainActivity::class.java)
-    private val CONSENT_URI = Uri.parse("https://parkinsonmpower.org/study/intro")
     private val CONSENT_ACTIVITY_REQUEST_CODE = 1725
 
     // tag for identifying an instance of a fragment
     private val TAG_FRAGMENT_TRACKING = "tracking"
     private val TAG_FRAGMENT_PROFILE = "profile"
+    private val TAG_FRAGMENT_WEB_CONSENT = "webCosent"
 
     // Mapping of a tag to a creation method for a fragment
     private val FRAGMENT_TAG_TO_CREATOR = ImmutableMap.Builder<String, Supplier<Fragment>>()
             .put(TAG_FRAGMENT_TRACKING, Supplier { TrackingTabFragment() })
             .put(TAG_FRAGMENT_PROFILE, Supplier { ProfileFragment() })
+            .put(TAG_FRAGMENT_WEB_CONSENT, Supplier {WebConsentFragment()})
             .build()
 
     // mapping of navigation IDs to a fragment tag
@@ -41,6 +44,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             .put(R.id.navigation_tracking, TAG_FRAGMENT_TRACKING)
             .put(R.id.navigation_profile, TAG_FRAGMENT_PROFILE)
             .build()
+
+    @Inject
+    lateinit var bridgeAccessViewModelFactory: BridgeAccessViewModel.Factory
 
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
@@ -74,7 +80,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             showSignUpActivity()
         } else if (!mainViewModel.isConsented) {
             // FIXME check for local consent pending upload @liujoshua 2018/08/06
-            showConsentActivity()
+            showConsent()
         } else {
             showMainActivityLayout()
         }
@@ -91,17 +97,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     fun showSignUpActivity() {
         LOGGER.debug("Showing sign up activity")
 
-        taskLauncher.launchTask(this, SIGN_UP, null)
-//        startActivity(Intent(Intent(this, ExternalIdSignInActivity::class.java)))
+//        taskLauncher.launchTask(this, SIGN_UP, null)
+        startActivity(Intent(Intent(this, ExternalIdSignInActivity::class.java)))
     }
 
-    fun showConsentActivity() {
+    fun showConsent() {
         LOGGER.debug("Showing consent activity")
 
-        // TODO use ChromeTab @liujoshua 2018/08/06
-        val browserIntent = Intent(Intent.ACTION_VIEW, CONSENT_URI)
-        startActivity(browserIntent)
-        startActivityForResult(browserIntent, CONSENT_ACTIVITY_REQUEST_CODE)
+        showFragment(TAG_FRAGMENT_WEB_CONSENT)
     }
 
     fun showMainActivityLayout() {

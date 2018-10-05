@@ -41,7 +41,7 @@
     <string name="title_insights">Insights</string>
     <string name="title_profile">Profile</string>
     <string name="title_activity_external_id_sign_in">Sign in</string>
-    
+
     <string name="tracking_tab_title">Tracking</string>
     <string name="measuring_tab_title">Measuring</string>
 
@@ -189,4 +189,7 @@
     <string name="medication_schedule_everyday">Everyday</string>
     <string name="medication_schedule_anytime">Anytime</string>
     <string name="medication_review_title">Medication list</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

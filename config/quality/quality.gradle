@@ -46,6 +46,8 @@ apply plugin: 'checkstyle'
 apply plugin: 'com.chaitanyapramod.findbugs-android'
 apply plugin: 'pmd'
 apply plugin: 'net.ltgt.errorprone'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 configurations.errorprone {
     resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.3.1'

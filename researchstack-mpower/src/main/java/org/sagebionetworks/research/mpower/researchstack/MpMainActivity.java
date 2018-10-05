@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import org.researchstack.backbone.ResearchStack;
 import org.researchstack.backbone.factory.IntentFactory;
 import org.researchstack.backbone.task.Task;
+import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider;
+import org.sagebionetworks.bridge.android.manager.dao.AccountDAO;
 import org.sagebionetworks.research.mpower.researchstack.framework.MpDataProvider;
 import org.sagebionetworks.research.mpower.researchstack.framework.MpResourceManager;
 import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory;
@@ -30,9 +32,7 @@ public class MpMainActivity extends AppCompatActivity {
     @Inject
     ResearchStack researchStack;
 
-    String testPhoneNumber = "2063066209";
-
-    String token = "252-345";
+    String testPhoneNumber = "3127722993";
 
     @SuppressLint("RxLeakedSubscription")
     @Override
@@ -75,7 +75,9 @@ public class MpMainActivity extends AppCompatActivity {
             // We came in via a link! Let's do something with it
             String token = appLinkData.getLastPathSegment();
             MpDataProvider provider = MpDataProvider.getInstance();
-            Subscription subscription = provider.signInWithPhoneAndToken("US", testPhoneNumber, token)
+            AccountDAO accountDAO = BridgeManagerProvider.getInstance().getAccountDao();
+            // TODO: prompt for entering phone when missing @liujoshua 2018/10/04
+            Subscription subscription = provider.signInWithPhoneAndToken(accountDAO.getPhoneRegion(), accountDAO.getPhoneNumber(), token)
                     .subscribe(dataResponse -> {
                         if (dataResponse.isAuthenticated()) {
                             LOGGER.debug("TokenLoginSubscribe: Authenticated Login Complete");

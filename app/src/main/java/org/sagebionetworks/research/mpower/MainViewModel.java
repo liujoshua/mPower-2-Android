@@ -15,7 +15,7 @@ public class MainViewModel extends ViewModel {
         this.authenticationManager = checkNotNull(authenticationManager);
     }
 
-    // TODO: make isAuthenticated and isConsented LiveData objects @liujoshua 2018/08/09
+    // TODO: make isAuthenticated and getAccessState LiveData objects @liujoshua 2018/08/09
     public boolean isAuthenticated() {
         UserSessionInfo userSessionInfo = authenticationManager.getUserSessionInfo();
         return userSessionInfo != null && userSessionInfo.isAuthenticated();
