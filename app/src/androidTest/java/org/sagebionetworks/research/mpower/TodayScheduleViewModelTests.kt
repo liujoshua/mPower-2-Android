@@ -5,14 +5,13 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.support.test.InstrumentationRegistry
 import android.support.test.filters.MediumTest
 import android.support.test.runner.AndroidJUnit4
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider
 import org.sagebionetworks.research.mpower.viewmodel.ItemType.ACTIVITIES
 import org.sagebionetworks.research.mpower.viewmodel.ItemType.MEDICATION
 import org.sagebionetworks.research.mpower.viewmodel.ItemType.SYMPTOMS

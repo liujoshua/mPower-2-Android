@@ -7,12 +7,12 @@ apply plugin: 'io.fabric'
 apply from: '../config/quality/quality.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "org.sagebionetworks.research.mpower"
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 27
         // this is not the final version code, product flavors add to it
         versionCode 21
         versionName "0.5.3"
@@ -83,8 +83,6 @@ dependencies {
 
     // ButterKnife
     implementation 'com.jakewharton:butterknife:8.8.1'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     // Logging
@@ -138,7 +136,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
 
-    androidTestImplementation 'org.mockito:mockito-android:2.21.0'
+    androidTestImplementation 'org.mockito:mockito-android:2.22.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

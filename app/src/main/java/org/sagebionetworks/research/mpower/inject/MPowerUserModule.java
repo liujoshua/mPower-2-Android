@@ -6,9 +6,8 @@ import org.sagebionetworks.bridge.android.di.BridgeApplicationScope;
 import org.sagebionetworks.research.mobile_ui.inject.PerformTaskFragmentScope;
 import org.sagebionetworks.research.mobile_ui.inject.ShowStepFragmentModule;
 import org.sagebionetworks.research.mobile_ui.perform_task.PerformTaskFragment;
-import org.sagebionetworks.research.mpower.EntryActivity;
-import org.sagebionetworks.research.mpower.EntryFragment;
-import org.sagebionetworks.research.mpower.MainActivity;
+import org.sagebionetworks.research.mpower.LauncherActivity;
+import org.sagebionetworks.research.mpower.LauncherFragment;
 import org.sagebionetworks.research.mpower.MainFragment;
 import org.sagebionetworks.research.mpower.authentication.ExternalIdSignInActivity;
 import org.sagebionetworks.research.mpower.history.HistoryFragment;
@@ -58,19 +57,16 @@ public abstract class MPowerUserModule {
     abstract StudyBurstReminderActivity contributeReminderActivityInjector();
 
     @ContributesAndroidInjector
-    abstract MainActivity contributeMainActivityInjector();
-
-    @ContributesAndroidInjector
     abstract ProfileFragment contributeProfileFragmentInjector();
 
     @ContributesAndroidInjector
     abstract TrackingMenuFragment contributeTrackingMenuFragmentInjector();
 
     @ContributesAndroidInjector
-    abstract EntryActivity contributeEntryActivityInjector();
+    abstract LauncherActivity contributeEntryActivityInjector();
 
     @ContributesAndroidInjector
-    abstract EntryFragment contributeEntryFragmentInjector();
+    abstract LauncherFragment contributeEntryFragmentInjector();
 
     @ContributesAndroidInjector
     abstract MainFragment contributeMainFragmentInjector();
