@@ -34,27 +34,37 @@ package org.sagebionetworks.research.mpower;
 
 import android.content.Intent;
 
+import org.sagebionetworks.bridge.android.access.BridgeAccessFragment;
 import org.sagebionetworks.research.mpower.authentication.ExternalIdSignInActivity;
 import org.sagebionetworks.research.mpower.sageresearch.ui.WebConsentFragment;
-import org.sagebionetworks.research.mpower.ui.entry.BridgeAccessFragment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EntryFragment extends BridgeAccessFragment {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EntryFragment.class);
+
     @Override
     public void onRequireAuthentication() {
+        LOGGER.debug("Showing ExternalIdSignInActivity");
+
         startActivity(new Intent(getContext(), ExternalIdSignInActivity.class));
     }
 
     @Override
     public void onRequireConsent() {
+        LOGGER.debug("Showing WebConsentFragment");
+
         getChildFragmentManager().beginTransaction()
-                .add(R.id.container, new WebConsentFragment())
-        .commit();
+                .replace(R.id.container, new WebConsentFragment())
+                .commit();
     }
 
     @Override
     public void onAccessGranted() {
+        LOGGER.debug("Showing MainFragment");
+
         getChildFragmentManager().beginTransaction()
-                .add(R.id.container, new MainFragment())
+                .replace(R.id.container, new MainFragment())
                 .commit();
     }
 }

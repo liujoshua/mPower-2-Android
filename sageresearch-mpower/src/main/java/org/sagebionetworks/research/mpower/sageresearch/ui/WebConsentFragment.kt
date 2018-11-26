@@ -83,7 +83,7 @@ class WebConsentFragment : DaggerFragment() {
         super.onAttach(context)
 
         // gets the PerformTaskViewModel instance of performTaskFragment
-        bridgeAccessViewModel = ViewModelProviders.of(this, bridgeAccessViewModelFactory)
+        bridgeAccessViewModel = ViewModelProviders.of(requireActivity(), bridgeAccessViewModelFactory)
                 .get(BridgeAccessViewModel::class.java)
     }
 
@@ -126,9 +126,10 @@ class WebConsentFragment : DaggerFragment() {
     @JavascriptInterface
     @AnyThread
     fun consentsToResearch(jsonString: String) {
-        val j = JSONObject(jsonString)
+        val jsonObject = JSONObject(jsonString)
         bridgeAccessViewModel.consentsToResearch(
-                j.getString("name"), SharingScope.fromValue(j.getString("scope")))
+                jsonObject.getString("name"),
+                SharingScope.fromValue(jsonObject.getString("scope")))
     }
 
     fun onWebViewReceiveError(url: String?, errorCode: Int, description: String?) {
@@ -136,6 +137,7 @@ class WebConsentFragment : DaggerFragment() {
     }
 
     fun onConsentUploadState(state: Resource<BridgeAccessState>?) {
+        // TODO: handle states, check BridgeAccessState value
         state?.let {
             when {
                 it.status == Status.LOADING -> {

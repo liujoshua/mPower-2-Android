@@ -48,6 +48,8 @@ import org.sagebionetworks.research.mpower.viewmodel.TodayActionBarItem;
 import org.sagebionetworks.research.mpower.viewmodel.TodayScheduleViewModel;
 import org.sagebionetworks.research.sageresearch.dao.room.ScheduledActivityEntity;
 import org.sagebionetworks.research.sageresearch.viewmodel.ReportViewModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.threeten.bp.Instant;
 
 import javax.annotation.Nonnull;

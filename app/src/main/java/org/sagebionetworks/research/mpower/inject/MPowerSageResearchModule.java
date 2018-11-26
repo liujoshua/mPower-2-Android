@@ -42,11 +42,8 @@ import org.sagebionetworks.research.motor_control_module.inject.CompletionStepMo
 import org.sagebionetworks.research.motor_control_module.inject.HandSelectionStepModule;
 import org.sagebionetworks.research.motor_control_module.inject.InstructionStepModule;
 import org.sagebionetworks.research.motor_control_module.inject.MPowerActiveStepModule;
-import org.sagebionetworks.research.motor_control_module.inject.OverviewStepModule;
 import org.sagebionetworks.research.motor_control_module.inject.TappingCompletionStepModule;
 import org.sagebionetworks.research.motor_control_module.inject.TappingStepModule;
-import org.sagebionetworks.research.mpower.inject.MpOverviewStepModule;
-import org.sagebionetworks.research.mpower.sageresearch.ui.MPowerWebConsentActivity;
 import org.sagebionetworks.research.mpower.sageresearch.ui.WebConsentFragment;
 
 import dagger.Module;
