@@ -32,22 +32,39 @@
 
 package org.sagebionetworks.research.mpower;
 
-import android.content.Intent;
-
 import org.sagebionetworks.bridge.android.access.BridgeAccessFragment;
-import org.sagebionetworks.research.mpower.authentication.ExternalIdSignInActivity;
+import org.sagebionetworks.research.mpower.onboarding.OnboardingFragment;
+import org.sagebionetworks.research.mpower.sageresearch.SageResearchTaskLauncher;
 import org.sagebionetworks.research.mpower.sageresearch.ui.WebConsentFragment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.UUID;
+
+import javax.inject.Inject;
+
 public class EntryFragment extends BridgeAccessFragment {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntryFragment.class);
+
+    @Inject
+    SageResearchTaskLauncher sageResearchTaskLauncher;
 
     @Override
     public void onRequireAuthentication() {
         LOGGER.debug("Showing ExternalIdSignInActivity");
 
-        startActivity(new Intent(getContext(), ExternalIdSignInActivity.class));
+        sageResearchTaskLauncher.launchTask(getContext(), "onboarding", UUID.randomUUID());
+//        startActivity(new Intent(getContext(), ExternalIdSignInActivity.class));
+
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.container, new OnboardingFragment())
+                .commit();
+//
+//         MpTaskFactory taskFactory = new MpTaskFactory();
+//        Task signupTask = taskFactory.createTask(getContext(), MpResourceManager.SIGNUP_TASK_RESOURCE);
+//        Intent intent = IntentFactory.INSTANCE.newTaskIntent(getContext(), MpSignupActivity.class, signupTask);
+//        startActivityForResult(intent, 1600);
+
     }
 
     @Override

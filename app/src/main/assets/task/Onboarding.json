@@ -1,0 +1,50 @@
+{
+  "identifier": "Onboarding",
+  "type": "Onboarding",
+  "items": [
+    {
+      "identifier": "introduction",
+      "type": "overview",
+      "title": "Tremor Test",
+      "text": "In this activity you will be holding the phone in your lap for 30 seconds. You will do this with each hand. Goal is to measure the tremors in your hand.",
+      "permissions": [
+        {
+          "permissionType": "motion",
+          "reason": "Access to Motion and Fitness sensors is required to measure the phones steadiness in your hand."
+        }
+      ],
+      "image": {
+        "type": "fetchable",
+        "imageName": "hold_phone_left",
+        "placementType": "topMarginBackground"
+      },
+      "icons": [
+        {
+          "icon": "icon_comfortable_place_to_sit",
+          "title": "COMFORTABLE PLACE TO SIT"
+        }
+      ],
+      "actions": {
+        "goForward": {
+          "type": "default",
+          "buttonTitle": "Get started"
+        },
+        "skip": {
+          "type": "reminder",
+          "reminderIdentifier": "Tremor"
+        }
+      },
+      "colorTheme": {
+        "colorStyle": {
+          "header": "darkBackground",
+          "body": "lightBackground",
+          "footer": "lightBackground"
+        }
+      },
+      "viewTheme": {
+        "viewIdentifier": "Overview",
+        "storyboardIdentifier": "ActiveTaskSteps"
+      }
+    }
+  ]
+}
