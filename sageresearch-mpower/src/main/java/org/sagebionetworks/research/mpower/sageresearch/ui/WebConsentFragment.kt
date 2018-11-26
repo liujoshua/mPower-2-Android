@@ -50,11 +50,12 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
-import org.sagebionetworks.research.mpower.sageresearch.ui.BridgeAccessViewModel.BridgeAccessStatus
-import org.sagebionetworks.research.presentation.contract.model.Resource
-import org.sagebionetworks.research.presentation.contract.model.Resource.Status.ERROR
-import org.sagebionetworks.research.presentation.contract.model.Resource.Status.LOADING
-import org.sagebionetworks.research.presentation.contract.model.Resource.Status.SUCCESS
+import org.json.JSONObject
+import org.sagebionetworks.bridge.android.access.BridgeAccessState
+import org.sagebionetworks.bridge.android.access.BridgeAccessViewModel
+import org.sagebionetworks.bridge.android.access.Resource
+import org.sagebionetworks.bridge.android.access.Resource.Status
+import org.sagebionetworks.bridge.rest.model.SharingScope
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
@@ -82,8 +83,8 @@ class WebConsentFragment : DaggerFragment() {
         super.onAttach(context)
 
         // gets the PerformTaskViewModel instance of performTaskFragment
-        bridgeAccessViewModel = ViewModelProviders.of(this, bridgeAccessViewModelFactory).get(
-                BridgeAccessViewModel::class.java)
+        bridgeAccessViewModel = ViewModelProviders.of(this, bridgeAccessViewModelFactory)
+                .get(BridgeAccessViewModel::class.java)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -125,23 +126,25 @@ class WebConsentFragment : DaggerFragment() {
     @JavascriptInterface
     @AnyThread
     fun consentsToResearch(jsonString: String) {
-        bridgeAccessViewModel.consentsToResearch(jsonString)
+        val j = JSONObject(jsonString)
+        bridgeAccessViewModel.consentsToResearch(
+                j.getString("name"), SharingScope.fromValue(j.getString("scope")))
     }
 
     fun onWebViewReceiveError(url: String?, errorCode: Int, description: String?) {
         LOGGER.warn("WebView received error: {} with code: {} for request: {}", description, errorCode, url)
     }
 
-    fun onConsentUploadState(state: Resource<BridgeAccessStatus>?) {
+    fun onConsentUploadState(state: Resource<BridgeAccessState>?) {
         state?.let {
             when {
-                it.status == LOADING -> {
+                it.status == Status.LOADING -> {
 
                 }
-                it.status == ERROR -> {
+                it.status == Status.ERROR -> {
 
                 }
-                it.status == SUCCESS -> {
+                it.status == Status.SUCCESS -> {
 
                 }
             }

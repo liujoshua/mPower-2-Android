@@ -7,12 +7,12 @@ apply plugin: 'io.fabric'
 apply from: '../config/quality/quality.gradle'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "org.sagebionetworks.research.mpower"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion 19
+        targetSdkVersion 28
         // this is not the final version code, product flavors add to it
         versionCode 21
         versionName "0.5.3"
