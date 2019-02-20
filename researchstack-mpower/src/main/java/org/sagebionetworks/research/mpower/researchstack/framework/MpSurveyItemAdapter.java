@@ -13,6 +13,7 @@ import org.researchstack.backbone.model.survey.TextfieldSurveyItem;
 import org.sagebionetworks.bridge.researchstack.task.creation.BridgeSurveyItemAdapter;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpFormSurveyItem;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpInstructionSurveyItem;
+import org.sagebionetworks.research.mpower.researchstack.framework.step.MpPhoneAuthenticationStep;
 
 import java.util.Map;
 
@@ -28,6 +29,7 @@ public class MpSurveyItemAdapter extends BridgeSurveyItemAdapter {
     public static final String MP_MULTI_CHECKBOX_SURVEY_ITEM_TYPE   = "mpMultiCheckbox";
     public static final String MP_BOOLEAN_SURVEY_ITEM_TYPE          = "mpBoolean";
     public static final String MP_SPINNER_SURVEY_ITEM_TYPE          = "mpSpinner";
+    public static final String MP_PHONE_AUTHENTICATION_ITEM_TYPE    = "mpPhoneAuthentication";
 
     // Custom Survey Items
     public static final String MP_INSTRUCTION_SURVEY_ITEM_TYPE = "mpInstruction";
@@ -51,6 +53,7 @@ public class MpSurveyItemAdapter extends BridgeSurveyItemAdapter {
                     // Custom Mappings
                     .put(MP_INSTRUCTION_SURVEY_ITEM_TYPE,       MpInstructionSurveyItem.class)
                     .put(MP_INSTRUCTION_PHONE_SURVEY_ITEM_TYPE, MpInstructionSurveyItem.class)
+                    .put(MP_PHONE_AUTHENTICATION_ITEM_TYPE,     MpInstructionSurveyItem.class)
                     .build();
 
     @Override

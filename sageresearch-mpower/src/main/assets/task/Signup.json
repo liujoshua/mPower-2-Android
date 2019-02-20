@@ -1,0 +1,78 @@
+{
+  "identifier": "Signup",
+  "shouldHideActions": [
+    "goBackward",
+    "skip"
+  ],
+  "steps": [
+    {
+      "identifier": "introduction",
+      "type": "instruction",
+      "title": "Welcome to mPower",
+      "text": "A Parkinson’s Disease Research Study",
+      "image": {
+        "type": "fetchable",
+        "imageName": "ic_welcome",
+        "placementType": "topBackground"
+      },
+      "colorTheme": {
+        "colorStyle": {
+          "header": "darkBackground",
+          "body": "darkBackground",
+          "footer": "darkBackground"
+        }
+      },
+      "viewTheme": {
+        "viewIdentifier": "RegistrationIntro",
+        "storyboardIdentifier": "Registration"
+      },
+      "actions": {
+        "goForward": {
+          "type": "default",
+          "buttonTitle": "Start"
+        }
+      }
+    },
+    {
+      "identifier":"enterPhoneNumber",
+      "type":"form",
+      "title":"Let's get started",
+      "text":"Please enter your phone number so we can see if you have an existing account.\n\nWe will not use your phone number for anything else until you have completed the Consent step of this study.",
+      "inputFields": [{
+        "dataType":"string",
+        "textFieldOptions":{
+          "keyboardType":"phonePad",
+          "textValidator":"^\\d{10}$",
+          "invalidMessage":"Please enter your full 10-digit phone number."
+        },
+        "uiHint":"textfield",
+        "placeholder":"Phone number"
+      }
+      ],
+      "image":{
+        "type": "fetchable",
+        "imageName": "ic_phonebook",
+        "placementType":"topBackground"
+      },
+      "colorTheme":{
+        "colorStyle": {
+          "header": "darkBackground",
+          "body": "darkBackground",
+          "footer": "darkBackground"
+        }
+      },
+      "viewTheme":{
+        "viewIdentifier":"PhoneRegistration",
+        "storyboardIdentifier":"Registration"
+      },
+      "actions":{
+        "learnMore":{
+          "type": "webView",
+          "buttonTitle": "Learn more",
+          "url" : "PhoneLearnMore.html"
+        }
+      },
+      "nextStepIdentifier": "waiting"
+    }
+  ]
+}
