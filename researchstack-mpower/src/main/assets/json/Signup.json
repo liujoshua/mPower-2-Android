@@ -39,7 +39,7 @@
     },
     {
       "identifier": "message_sent",
-      "type": "mpInstruction",
+      "type": "mpPhoneAuthentication",
       "text": "Your link is on its way!",
       "detailText": "We sent you a link to verify your identity via SMS text message to",
       "footnote": "This link will expire in 24 hours, so be sure to tap on the link in your messages soon!",

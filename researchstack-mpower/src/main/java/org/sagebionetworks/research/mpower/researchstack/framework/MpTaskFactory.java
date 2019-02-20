@@ -1,7 +1,13 @@
 package org.sagebionetworks.research.mpower.researchstack.framework;
 
-import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.*;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_BOOLEAN_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_CHECKBOX_SURVEY_ITEM_TYPE;
 import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_INTEGER_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_MULTIPLE_CHOICE_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_MULTI_CHECKBOX_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_SINGLE_CHOICE_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_SPINNER_SURVEY_ITEM_TYPE;
+import static org.sagebionetworks.research.mpower.researchstack.framework.MpSurveyItemAdapter.MP_TEXT_SURVEY_ITEM_TYPE;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -30,6 +36,7 @@ import org.sagebionetworks.research.mpower.researchstack.framework.step.MpFormSt
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpFormSurveyItem;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpInstructionStep;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpInstructionSurveyItem;
+import org.sagebionetworks.research.mpower.researchstack.framework.step.MpPhoneAuthenticationStep;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpPhoneInstructionStep;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpSmartSurveyTask;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.body.MpBooleanAnswerFormat;
@@ -103,6 +110,13 @@ public class MpTaskFactory extends BridgeSurveyFactory {
                                             "be MpInstructionSurveyItem");
                         }
                         return createMpPhoneInstructionStep((MpInstructionSurveyItem) item);
+                    case MpSurveyItemAdapter.MP_PHONE_AUTHENTICATION_ITEM_TYPE:
+                        if (!(item instanceof MpInstructionSurveyItem)) {
+                            throw new IllegalStateException(
+                                    "Error in json parsing, Mp_phone_authentication types must " +
+                                            "be MpInstructionSurveyItem");
+                        }
+                        return createMpPhoneAuthenticationStep((MpInstructionSurveyItem) item);
                     case MpSurveyItemAdapter.MP_FORM_SURVEY_ITEM_TYPE:
                         if (!(item instanceof MpFormSurveyItem)) {
                             throw new IllegalStateException("Error in json parsing, Mp_form types must be MpFormSurveyItem");
@@ -368,6 +382,12 @@ public class MpTaskFactory extends BridgeSurveyFactory {
     protected MpPhoneInstructionStep createMpPhoneInstructionStep(MpInstructionSurveyItem item) {
         MpPhoneInstructionStep step = new MpPhoneInstructionStep(
                 item.identifier, item.title, item.text);
+        fillMpInstructionStep(step, item);
+        return step;
+    }
+
+    MpPhoneAuthenticationStep createMpPhoneAuthenticationStep(MpInstructionSurveyItem item) {
+        MpPhoneAuthenticationStep step = new MpPhoneAuthenticationStep(item.identifier, item.title, item.text);
         fillMpInstructionStep(step, item);
         return step;
     }

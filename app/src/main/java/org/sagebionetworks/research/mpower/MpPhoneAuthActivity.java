@@ -34,7 +34,6 @@ public class MpPhoneAuthActivity extends DaggerAppCompatActivity {
 
     private final CompositeSubscription compositeSubscription = new CompositeSubscription();
 
-    @SuppressLint("RxLeakedSubscription")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

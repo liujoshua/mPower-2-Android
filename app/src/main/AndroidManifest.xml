@@ -50,7 +50,8 @@
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/MPowerTheme"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".EntryActivity">
 
             <tools:validation testUrl="https://parkinsonmpower.org/sage-mpower-2/phoneSignIn/TOKEN" />
 
