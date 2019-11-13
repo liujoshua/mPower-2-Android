@@ -53,6 +53,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
+import org.sagebionetworks.researchstack.backbone.interop.ViewSageBackboneInteropTaskActivity;
 import org.sagebionetworks.researchstack.backbone.result.StepResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
 import org.sagebionetworks.researchstack.backbone.task.Task;
@@ -267,8 +268,8 @@ public class MpFormStepLayout extends FormStepLayout implements
         if (mpFormStep.bottomLinkTaskId != null) {
             MpTaskFactory taskFactory = new MpTaskFactory();
             Task task = taskFactory.createTask(getContext(), mpFormStep.bottomLinkTaskId);
-            getContext().startActivity(IntentFactory.INSTANCE.newTaskIntent(
-                    getContext(), MpViewTaskActivity.class, task));
+            getContext().startActivity(ViewSageBackboneInteropTaskActivity.newIntent(
+                    getContext(), task));
         } else {
             super.onSkipClicked();
         }
@@ -316,6 +317,7 @@ public class MpFormStepLayout extends FormStepLayout implements
     /**
      * @param stepBody to inflate and show in the bottom container
      */
+    @Override
     public void showBottomQuestionBody(StepBody stepBody) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
@@ -335,6 +337,7 @@ public class MpFormStepLayout extends FormStepLayout implements
     /**
      * Call to hide the bottom question body
      */
+    @Override
     public void hideBottomQuestionBody() {
         bottomBodyContainer.removeAllViews();
     }

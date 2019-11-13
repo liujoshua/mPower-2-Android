@@ -49,6 +49,7 @@ public class MpCheckboxAnswerFormat extends BooleanAnswerFormat {
         super(trueString, falseString);
     }
 
+    @Override
     public QuestionType getQuestionType() {
         // For this to work, we must also provide custom code in CrfTaskHelper for this format
         return () -> MpCheckboxQuestionBody.class;

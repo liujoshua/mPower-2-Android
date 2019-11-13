@@ -49,6 +49,7 @@ public class MpRadioButtonAnswerFormat extends MpChoiceAnswerFormat {
         super(ChoiceAnswerStyle.SingleChoice, choices);
     }
 
+    @Override
     public QuestionType getQuestionType() {
         // For this to work, we must also provide custom code in CrfTaskHelper for this format
         return () -> MpRadioButtonQuestionBody.class;

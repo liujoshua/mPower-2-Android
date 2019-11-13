@@ -1,5 +1,6 @@
 package org.sagebionetworks.research.mpower.tracking.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
@@ -35,6 +36,7 @@ public class MedicationSelectionFragment extends SelectionFragment<MedicationLog
         List<SelectionUIFormItem> availableItems = SortUtil.getAvailableElementsSorted(viewModel.getAvailableElements().getValue());
         if (viewModel.getActiveElementsById().getValue() != null) {
             Set<String> selectedIdentifiers = viewModel.getActiveElementsById().getValue().keySet();
+            @SuppressLint("JdkObsolete")
             List<SelectionUIFormItem> unselectedAvailableItems = new LinkedList<>();
             for (int i = 0; i < availableItems.size(); i++) {
                 SelectionUIFormItem item = availableItems.get(i);

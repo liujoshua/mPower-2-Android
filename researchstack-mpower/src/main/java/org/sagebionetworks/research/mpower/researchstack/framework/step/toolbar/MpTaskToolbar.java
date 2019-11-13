@@ -431,7 +431,7 @@ public class MpTaskToolbar extends Toolbar {
         return str;
     }
 
-    public class Progress {
+    public static class Progress {
         public int progress;
         public int max;
         public CharSequence stepProgressText;

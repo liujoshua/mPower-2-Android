@@ -54,6 +54,7 @@ public class MpIntegerAnswerFormat extends IntegerAnswerFormat {
         super(minValue, maxValue);
     }
 
+    @Override
     public QuestionType getQuestionType() {
         // For this to work, we must also provide custom code in CrfTaskHelper for this format
         return () -> MpIntegerQuestionBody.class;

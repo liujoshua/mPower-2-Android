@@ -62,6 +62,7 @@ public class MpTextQuestionBody extends TextQuestionBody
     }
 
     public @LayoutRes
+    @Override
     int getBodyViewRes() {
         return R.layout.mp_step_body_text;
     }
@@ -111,6 +112,7 @@ public class MpTextQuestionBody extends TextQuestionBody
             super(maximumLength);
         }
 
+        @Override
         public QuestionType getQuestionType() {
             // For this to work, we must also provide custom code in BpTaskHelper for this format
             return () -> MpTextQuestionBody.class;

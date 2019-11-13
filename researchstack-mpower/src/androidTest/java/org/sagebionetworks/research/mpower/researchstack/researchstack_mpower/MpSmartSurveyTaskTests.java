@@ -1040,6 +1040,7 @@ public class MpSmartSurveyTaskTests {
             this.initialDataGroups = new HashSet<>(dataGroups);
         }
         //public List<String> dataGroupsAdded = new ArrayList<>();
+        @Override
         public List<Step> getSteps() {
             return steps;
         }

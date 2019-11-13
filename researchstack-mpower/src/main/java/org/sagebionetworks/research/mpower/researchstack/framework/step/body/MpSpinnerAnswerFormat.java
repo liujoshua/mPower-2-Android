@@ -34,6 +34,7 @@ public class MpSpinnerAnswerFormat extends MpChoiceAnswerFormat {
         super(answerStyle, choices);
     }
 
+    @Override
     public QuestionType getQuestionType() {
         // For this to work, we must also provide custom code in CrfTaskHelper for this format
         return () -> MpSpinnerQuestionBody.class;

@@ -37,11 +37,14 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.annotation.IdRes;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.sagebionetworks.researchstack.backbone.interop.ViewSageBackboneInteropTaskActivity;
 import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
 import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
@@ -61,11 +64,10 @@ import org.sagebionetworks.research.mpower.researchstack.inject.MPowerResearchSt
  * It supports customization of the status bar, tool bar, and several view layouts by any StepLayout.
  */
 
-public class MpViewTaskActivity extends ViewTaskActivity {
+public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
 
     protected ViewGroup toolbarContainer;
     protected TextView stepProgressTextView;
-
     protected MpTaskToolbar getToolbar() {
         if (toolbar != null && toolbar instanceof MpTaskToolbar) {
             return (MpTaskToolbar)toolbar;

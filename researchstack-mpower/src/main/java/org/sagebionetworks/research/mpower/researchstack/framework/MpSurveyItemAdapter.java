@@ -34,7 +34,7 @@ public class MpSurveyItemAdapter extends BridgeSurveyItemAdapter {
     public static final String MP_INSTRUCTION_PHONE_SURVEY_ITEM_TYPE = "mpPhoneInstruction";
 
     @VisibleForTesting
-    static final Map<String, Class<? extends SurveyItem>> TYPE_TO_CLASS =
+    static Map<String, Class<? extends SurveyItem>> TYPE_TO_CLASS =
             ImmutableMap.<String, Class<? extends org.sagebionetworks.researchstack.backbone.model.survey.SurveyItem>>builder()
 
                     // Form Mappings
