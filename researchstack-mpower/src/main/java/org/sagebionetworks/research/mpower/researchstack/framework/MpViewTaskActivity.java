@@ -37,6 +37,8 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
@@ -44,9 +46,12 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.researchstack.foundation.components.common.task.OrderedTask;
+import org.researchstack.foundation.components.presentation.ITaskProvider;
 import org.sagebionetworks.researchstack.backbone.interop.ViewSageBackboneInteropTaskActivity;
 import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
+import org.sagebionetworks.researchstack.backbone.task.Task;
 import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
 import org.sagebionetworks.researchstack.backbone.ui.step.layout.ActiveStepLayout;
 import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepLayout;
@@ -56,6 +61,9 @@ import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.
 import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarActionManipulator;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarIconManipulator;
 import org.sagebionetworks.research.mpower.researchstack.inject.MPowerResearchStackModule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mdephillips on 12/11/17, edited to pull into the mPower RS framework on 10/14/18.
@@ -217,6 +225,19 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+//
+//    @VisibleForTesting
+//    protected ITaskProvider getITaskProvider(@NonNull Task task) {
+//        org.sagebionetworks.researchstack.backbone.task.OrderedTask orderedTask = (org.sagebionetworks.researchstack.backbone.task.OrderedTask) task;
+//
+//        List<org.researchstack.foundation.core.models.step.Step> uiSteps = new ArrayList<>();
+//        for (org.sagebionetworks.researchstack.backbone.step.Step backboneStep : orderedTask.getSteps()) {
+//            org.researchstack.foundation.core.models.step.Step
+//                    uiStep = (org.researchstack.foundation.core.models.step.Step) getStepAdapterFactory().create(backboneStep);
+//            uiSteps.add(uiStep);
+//        }
+//        return (taskIdentifier) -> new OrderedTask(task.getIdentifier(), uiSteps);
+//    }
 
     public interface MediaVolumeController {
         /**
