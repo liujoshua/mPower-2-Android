@@ -16,7 +16,7 @@ import org.sagebionetworks.bridge.researchstack.BridgeDataProvider
 import org.sagebionetworks.bridge.rest.RestUtils
 import org.sagebionetworks.research.mpower.R
 import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory
-import org.sagebionetworks.research.mpower.researchstack.framework.MpViewTaskActivity
+import org.sagebionetworks.researchstack.backbone.interop.MpViewTaskActivity
 import org.sagebionetworks.researchstack.backbone.factory.IntentFactory
 import org.sagebionetworks.researchstack.backbone.model.TaskModel
 import org.sagebionetworks.researchstack.backbone.result.TaskResult

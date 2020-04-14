@@ -52,7 +52,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
 import org.sagebionetworks.researchstack.backbone.interop.ViewSageBackboneInteropTaskActivity;
 import org.sagebionetworks.researchstack.backbone.result.StepResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
@@ -67,7 +66,6 @@ import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory
 import static org.sagebionetworks.researchstack.backbone.ui.step.body.StepBody.VIEW_TYPE_DEFAULT;
 
 import org.sagebionetworks.research.mpower.researchstack.R;
-import org.sagebionetworks.research.mpower.researchstack.framework.MpViewTaskActivity;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskBehindToolbarManipulator;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskStatusBarManipulator;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarTintManipulator;

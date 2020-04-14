@@ -23,12 +23,6 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <org.sagebionetworks.researchstack.backbone.ui.views.StepSwitcher
-        android:id="@+id/bp_step_switcher"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/bp_toolbar_container" />
-
     <LinearLayout
         android:id="@id/bp_toolbar_container"
         android:layout_width="match_parent"
@@ -52,5 +46,11 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
+
+    <org.sagebionetworks.researchstack.backbone.ui.views.StepSwitcher
+        android:id="@+id/bp_step_switcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bp_toolbar_container" />
 
 </RelativeLayout>

@@ -15,7 +15,7 @@ import org.sagebionetworks.bridge.rest.RestUtils
 import org.sagebionetworks.bridge.rest.model.SurveyReference
 import org.sagebionetworks.research.mpower.reminders.StudyBurstReminderActivity
 import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory
-import org.sagebionetworks.research.mpower.researchstack.framework.MpViewTaskActivity
+import org.sagebionetworks.researchstack.backbone.interop.MpViewTaskActivity
 import org.sagebionetworks.research.sageresearch.profile.ProfileSettingsFragment
 import org.sagebionetworks.research.sageresearch.profile.ProfileViewModel
 import org.sagebionetworks.researchstack.backbone.factory.IntentFactory

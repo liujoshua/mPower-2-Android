@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright 2018  Sage Bionetworks. All rights reserved.
+ * Copyright 2020  Sage Bionetworks. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -30,25 +30,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.sagebionetworks.research.mpower.researchstack.framework;
+package org.sagebionetworks.researchstack.backbone.interop;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.researchstack.foundation.components.common.task.OrderedTask;
-import org.researchstack.foundation.components.presentation.ITaskProvider;
-import org.sagebionetworks.researchstack.backbone.interop.ViewSageBackboneInteropTaskActivity;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.researchstack.foundation.components.presentation.TaskPresentationViewModelFactory;
+import org.sagebionetworks.research.mpower.researchstack.R;
+import org.sagebionetworks.research.mpower.researchstack.framework.MpActivityResultListener;
+import org.sagebionetworks.research.mpower.researchstack.framework.MpResultListener;
+import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbar;
+import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarActionManipulator;
+import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarIconManipulator;
+import org.sagebionetworks.research.mpower.researchstack.inject.MPowerResearchStackModule;
+import org.sagebionetworks.researchstack.backbone.interop.presentation.BackwardsCompatibleTaskPresentationFragment;
 import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.step.Step;
 import org.sagebionetworks.researchstack.backbone.task.Task;
@@ -56,29 +61,22 @@ import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
 import org.sagebionetworks.researchstack.backbone.ui.step.layout.ActiveStepLayout;
 import org.sagebionetworks.researchstack.backbone.ui.step.layout.StepLayout;
 
-import org.sagebionetworks.research.mpower.researchstack.R;
-import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbar;
-import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarActionManipulator;
-import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbarIconManipulator;
-import org.sagebionetworks.research.mpower.researchstack.inject.MPowerResearchStackModule;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by mdephillips on 12/11/17, edited to pull into the mPower RS framework on 10/14/18.
- *
- * The MpViewTaskActivity is a ViewTaskActivity that is themed with a Sage style tool bar and footer view.
- * It supports customization of the status bar, tool bar, and several view layouts by any StepLayout.
+ * <p>
+ * The MpViewTaskActivity is a ViewTaskActivity that is themed with a Sage style tool bar and footer view. It supports
+ * customization of the status bar, tool bar, and several view layouts by any StepLayout.
  */
 
 public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
 
     protected ViewGroup toolbarContainer;
+
     protected TextView stepProgressTextView;
+
     protected MpTaskToolbar getToolbar() {
         if (toolbar != null && toolbar instanceof MpTaskToolbar) {
-            return (MpTaskToolbar)toolbar;
+            return (MpTaskToolbar) toolbar;
         }
         return null;
     }
@@ -91,7 +89,7 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         boolean superResult = super.onCreateOptionsMenu(menu);
         // Needed to initialize the toolbar icons after the menu is inflated
         getToolbar().refreshToolbarIcons(currentStepLayout, getSupportActionBar());
@@ -129,7 +127,8 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
     }
 
     @Override
-    public @IdRes int getToolbarResourceId() {
+    public @IdRes
+    int getToolbarResourceId() {
         return R.id.bp_task_toolbar;
     }
 
@@ -168,14 +167,14 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
         // Allow for customization of the toolbar
         if (current instanceof MpTaskToolbarActionManipulator) {
             MpTaskToolbarActionManipulator manipulator = (MpTaskToolbarActionManipulator) current;
-            if(item.getItemId() == org.sagebionetworks.researchstack.backbone.R.id.rsb_clear_menu_item) {
+            if (item.getItemId() == org.sagebionetworks.researchstack.backbone.R.id.rsb_clear_menu_item) {
                 return manipulator.bpToolbarRightIconClicked();
             } else if (item.getItemId() == android.R.id.home) {
                 clickWasConsumed = manipulator.bpToolbarLeftIconClicked();
             }
         }
 
-        if(!clickWasConsumed && item.getItemId() == android.R.id.home) {
+        if (!clickWasConsumed && item.getItemId() == android.R.id.home) {
             activity.showConfirmExitDialog();
             return true;
         }
@@ -185,26 +184,32 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
 
     /**
      * Helper method to call the task result listener for a step layout
-     * @param taskResult current task result for task activity
-     * @param current step layout
+     *
+     * @param taskResult
+     *         current task result for task activity
+     * @param current
+     *         step layout
      */
     public static void callTaskResultListener(TaskResult taskResult, StepLayout current) {
         // Let steps know about the task result if it needs to
         if (current instanceof MpResultListener) {
-            ((MpResultListener)current).taskResult(taskResult);
+            ((MpResultListener) current).taskResult(taskResult);
         }
     }
 
     /**
      * Helper method for refreshing the volume control for a task activity
-     * @param taskActivity that is displaying the step layout
-     * @param current step layout
+     *
+     * @param taskActivity
+     *         that is displaying the step layout
+     * @param current
+     *         step layout
      */
     public static void refreshVolumeControl(Activity taskActivity, StepLayout current) {
         // Media Volume controls
         int streamType = AudioManager.USE_DEFAULT_STREAM_TYPE;
         if (current instanceof MediaVolumeController) {
-            if (((MediaVolumeController)current).controlMediaVolume()) {
+            if (((MediaVolumeController) current).controlMediaVolume()) {
                 streamType = AudioManager.STREAM_MUSIC;
             }
         } else if (current instanceof ActiveStepLayout) {
@@ -216,10 +221,10 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             StepLayout layout = getCurrentStepLayout();
-            if(layout instanceof MpActivityResultListener) {
-                ((MpActivityResultListener)layout).onActivityFinished(requestCode, resultCode, data);
+            if (layout instanceof MpActivityResultListener) {
+                ((MpActivityResultListener) layout).onActivityFinished(requestCode, resultCode, data);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -244,5 +249,13 @@ public class MpViewTaskActivity extends ViewSageBackboneInteropTaskActivity {
          * @return if true, volume buttons will control media, not ringer
          */
         boolean controlMediaVolume();
+    }
+
+    @Override
+    BackwardsCompatibleTaskPresentationFragment createTaskFragment(@NonNull Task task,
+            @Nullable TaskResult taskResult, @Nullable org.researchstack.foundation.core.models.step.Step step) {
+        return BackwardsCompatibleTaskPresentationFragment
+                .createInstance(task.getIdentifier(), getTaskPresentationViewModelFactory(task),
+                        getIStepFragmentProvider());
     }
 }
