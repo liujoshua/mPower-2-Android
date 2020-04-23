@@ -19,7 +19,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:3.6.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
@@ -39,7 +39,10 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.26.1'
     }
 }
-
+configurations.all {
+    // Don't cache changing modules at all.
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
 allprojects {
     repositories {
         google()

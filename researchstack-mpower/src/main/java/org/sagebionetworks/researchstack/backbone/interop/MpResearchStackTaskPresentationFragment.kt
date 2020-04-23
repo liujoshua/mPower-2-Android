@@ -29,10 +29,38 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package org.sagebionetworks.researchstack.backbone.interop
 
-package org.sagebionetworks.research.mpower.researchstack.framework;
+import androidx.appcompat.widget.Toolbar
+import org.researchstack.foundation.components.presentation.TaskPresentationViewModel
+import org.researchstack.foundation.core.models.step.Step
+import org.sagebionetworks.research.mpower.researchstack.framework.step.toolbar.MpTaskToolbar
+import org.sagebionetworks.researchstack.backbone.interop.presentation.BackwardsCompatibleTaskPresentationFragment
 
-import org.researchstack.foundation.components.presentation.TaskPresentationFragment;
+class MpResearchStackTaskPresentationFragment : BackwardsCompatibleTaskPresentationFragment() {
+    protected var toolbar: Toolbar? = null
 
-public class MpResearchStackTaskPresentationFragment extends TaskPresentationFragment {
+    override fun showStep(taskNavigatorState: TaskPresentationViewModel.TaskNavigatorState<Step>) {
+        super.showStep(taskNavigatorState)
+
+        var toolbar: MpTaskToolbar? = getToolbar()
+//        toolbar.refreshToolbarIcons(currentStepLayout, getSupportActionBar())
+//        toolbar.refreshToolbarBackgroundColor(currentStepLayout, toolbarContainer)
+//        toolbar.refreshViewBehindToolbar(root, currentStepLayout)
+//        toolbar.refreshViewHideToolbar(currentStepLayout, toolbarContainer)
+//
+//        val stepProgressText = toolbar.createOrderedTaskStepProgressText(task, currentStep)
+//        toolbar.refreshStepProgress(currentStepLayout, stepProgressTextView, stepProgressText)
+//
+//        toolbar.setStatusBarColor(this, currentStepLayout)
+//
+//        MpViewTaskActivity.refreshVolumeControl(this, currentStepLayout)
+//        MpViewTaskActivity.callTaskResultListener(taskResult, currentStepLayout)
+    }
+
+    protected fun getToolbar(): MpTaskToolbar? {
+        return if (toolbar != null && toolbar is MpTaskToolbar) {
+            toolbar as MpTaskToolbar?
+        } else null
+    }
 }

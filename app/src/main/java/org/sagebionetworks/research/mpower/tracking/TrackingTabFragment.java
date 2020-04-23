@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.sagebionetworks.researchstack.backbone.factory.IntentFactory;
+import org.sagebionetworks.researchstack.backbone.interop.MpViewTaskActivity;
 import org.sagebionetworks.researchstack.backbone.model.TaskModel;
 import org.sagebionetworks.researchstack.backbone.result.TaskResult;
 import org.sagebionetworks.researchstack.backbone.ui.ViewTaskActivity;
@@ -31,7 +32,6 @@ import org.sagebionetworks.research.mobile_ui.show_step.view.SystemWindowHelper.
 import org.sagebionetworks.research.mpower.R;
 import org.sagebionetworks.research.mpower.reminders.StudyBurstReminderActivity;
 import org.sagebionetworks.research.mpower.researchstack.framework.MpTaskFactory;
-import org.sagebionetworks.research.mpower.researchstack.framework.MpViewTaskActivity;
 import org.sagebionetworks.research.mpower.researchstack.framework.step.MpSmartSurveyTask;
 import org.sagebionetworks.research.mpower.studyburst.StudyBurstActivity;
 import org.sagebionetworks.research.mpower.viewmodel.StudyBurstItem;

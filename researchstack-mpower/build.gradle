@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -35,7 +35,9 @@ dependencies {
 
     // Dagger needs access to some RS classes
     api "org.sagebionetworks.bridge:researchstack-sdk:$bridge_sdk_version"
-    api "org.researchstack:sage_backbone_interop:1.5.0-SNAPSHOT"
+    api "org.researchstack:sage_backbone_interop:1.5.0-SNAPSHOT",  {
+        changing = true;
+    }
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.0'

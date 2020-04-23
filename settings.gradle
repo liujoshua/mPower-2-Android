@@ -10,8 +10,8 @@ include ':app', ':sageresearch-mpower', ':researchstack-mpower'
 
 // uncomment this for a "composite build" which substitutes BridgeAndroidSDK artifacts
 // for the source code in the indicated directory
-//includeBuild ('..BridgeAndroidSDK')
+//includeBuild ('../BridgeAndroidSDK')
 
 // uncomment this for a "composite build" which substitutes ResearchStack artifacts
 // for the source code in the indicated directory
-//includeBuild ('..ResearchStack')
+includeBuild ('../ResearchStack')
